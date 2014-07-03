@@ -1,0 +1,40 @@
+# Turn everything on or off
+.trace on
+
+################################################################################
+# Destination
+#############
+#
+# Entry:
+#	.destination dstname filename
+
+.destination DEFAULT		./class.trace
+.destination DST_SAMPLE1	./sample1-cfg.trace
+
+################################################################################
+# Source
+########
+#
+# Entry:
+#	ClassName [SeverityLevel [Destination]]
+#
+# Severity levels:
+#	EMERG
+#	ALERT
+#	CRIT
+#	ERROR
+#	WARN
+#	NOTICE
+#	INFO
+#	DEBUG
+#	SCOPE		<- Method/scope entry/exit
+#
+# Default Destination:
+#	DEFAULT
+
+Foo				SCOPE
+Bar				SCOPE
+SomeThing		INFO	DST_SAMPLE1
+
+# no SeverityLevel set = disabled
+IgnoredSrc
