@@ -9,8 +9,11 @@
 #if __cplusplus <= 199711L
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/locks.hpp>
 #else
 #include <memory>
+#include <mutex>
 #endif
 
 
@@ -28,9 +31,13 @@ namespace class_trace
 #if __cplusplus <= 199711L
 using boost::shared_ptr;
 using boost::make_shared;
+using boost::mutex;
+using boost::lock_guard;
 #else
 using std::shared_ptr;
 using std::make_shared;
+using std::mutex;
+using std::lock_guard;
 #endif
 
 typedef enum
@@ -74,17 +81,19 @@ public:
 			ts.tm_mday, ts.tm_mon + 1, ts.tm_year + 1900,
 			ts.tm_hour, ts.tm_min, ts.tm_sec);
 
-		ss << strDateTime << " ";
+		ss << strDateTime << ' ';
 #endif
 		ss << className << '.' << func
 			<< " ["	//<< file << ':'
 			<< line << "] "
-			<< msg << std::endl;
+			<< msg;
 
-		os_ << ss.str();
+		lock_guard<mutex> lock(mtx_);
+		os_ << ss.str() << std::endl;
 	}
 
 private:
+	mutex mtx_;
 	std::ofstream os_;
 };
 
