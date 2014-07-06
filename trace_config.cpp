@@ -69,9 +69,10 @@ private:
 	:	enabled_(true),
 		defDst_(DEFAULT_DST)
 	{
-		if (outFile)
-			destinations_[defDst_] = make_shared<Destination>(outFile);
 		init();
+
+		if (outFile && destinations_.find(defDst_) == destinations_.end())
+			destinations_[defDst_] = make_shared<Destination>(outFile);
 	}
 
 	DestinationPtr dst(const std::string& name) const

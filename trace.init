@@ -33,7 +33,7 @@
 #	DEFAULT
 
 Foo				SCOPE
-Bar				SCOPE
+Bar				SCOPE	DEFAULT
 SomeThing		INFO	DST_SAMPLE1
 
 # no SeverityLevel set = disabled
