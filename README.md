@@ -13,7 +13,7 @@ Second you include class_trace.h and declare class you need to trace using TRACE
 
 class SomeThing
 {
-  TRACE_CLASS(SomeThing);
+  TRACE_CLASS(SomeThing)
 
   // ...
 };
@@ -34,7 +34,7 @@ After that you can use any of these macros in the class's methods as C++ streams
 
 class SomeThing
 {
-	TRACE_CLASS(SomeThing);
+	TRACE_CLASS(SomeThing)
 
 public:
 	void foo() const
@@ -116,10 +116,10 @@ In configurable mode ClassTrace you may set different output files for the class
 ```
 # trace.init
 .destination DEFAULT	./class.trace
-.destination DST_1	  ./other.trace
+.destination DST_1		./other.trace
 
-Foo				  SCOPE
-Bar				  SCOPE	DEFAULT
+Foo				SCOPE
+Bar				SCOPE	DEFAULT
 SomeThing		INFO	DST_1
 ```
 

@@ -47,6 +47,9 @@ add_executable(s2 sample2.cpp)
 set_target_properties(s2 PROPERTIES COMPILE_FLAGS -DCLASS_TRACE_CONFIG)
 target_link_libraries(s2 ${LIB_TRACE})
 
+add_executable(s3 sample3.cpp)
+set_target_properties(s3 PROPERTIES COMPILE_FLAGS -DCLASS_TRACE_OUT=sample3.trace)
+
 add_executable(s1_cfg sample1.cpp)
 set_target_properties(s1_cfg PROPERTIES COMPILE_FLAGS -DCLASS_TRACE_CONFIG)
 target_link_libraries(s1_cfg ${LIB_TRACE})
@@ -54,12 +57,18 @@ target_link_libraries(s1_cfg ${LIB_TRACE})
 # tests
 
 add_test(test1 s1)
+add_test(test1_cfg s1_cfg)
 add_test(test2 s2)
-add_test(test3 s1_cfg)
+add_test(test3 s3)
 
-set_property(TEST
-	test2 test3
+set_property(TEST test1 test3
+	PROPERTY ENVIRONMENT
+		LD_LIBRARY_PATH=${LD_CXX_PATH}
+)
+
+set_property(TEST test1_cfg test2
 	PROPERTY ENVIRONMENT
 		PATH=${PROJECT_SOURCE_DIR}
+		LD_LIBRARY_PATH=${LD_CXX_PATH}
 		CLASS_TRACE_CONFIG=${PROJECT_SOURCE_DIR}/trace.init
 )

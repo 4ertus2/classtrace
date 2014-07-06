@@ -2,7 +2,7 @@
 
 class SomeThing
 {
-	TRACE_CLASS(SomeThing); ///< enable trace for this class
+	TRACE_CLASS(SomeThing) ///< enable trace for this class
 
 public:
 	void foo() const

@@ -2,7 +2,7 @@
 
 class Foo
 {
-	TRACE_CLASS(Foo);
+	TRACE_CLASS(Foo)
 
 public:
 	Foo()
@@ -15,7 +15,7 @@ public:
 
 class Bar
 {
-	TRACE_CLASS(Bar);
+	TRACE_CLASS(Bar)
 
 public:
 	Bar()

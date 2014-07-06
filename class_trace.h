@@ -13,6 +13,8 @@
 		static class_trace::ClassTrace ct(#name);\
 		return ct; }
 
+#define TRACE_LOCAL(name)	namespace { TRACE_CLASS(name) }
+
 #define MACRO_CONCAT_IMPL(x, y)	x##y
 #define MACRO_CONCAT(x, y)		MACRO_CONCAT_IMPL(x, y)
 #define TRACE_SCOPE		class_trace::Scope MACRO_CONCAT(scopeTrace_, __COUNTER__)(__func__, __FILE__, __LINE__, classTrace())
@@ -27,6 +29,8 @@
 #define TRACE_DEBUG		classTrace().trace(class_trace::DEBUG,	__func__, __FILE__, __LINE__)
 
 #ifdef CLASS_TRACE_LEVEL
+# undef TRACE_SCOPE
+# define TRACE_SCOPE
 # if CLASS_TRACE_LEVEL < 7
 #  undef TRACE_DEBUG
 # endif
@@ -53,6 +57,7 @@
 #else // DISABLE_CLASS_TRACE
 
 #define TRACE_CLASS(name)
+#define TRACE_LOCAL(name)
 #define TRACE_SCOPE
 
 #endif // DISABLE_CLASS_TRACE
