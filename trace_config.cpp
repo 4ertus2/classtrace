@@ -15,6 +15,9 @@ using std::string;
 namespace class_trace
 {
 
+static const char * ENV_VAR_NAME = "CLASS_TRACE_CONFIG";
+static const char * DEFAULT_DST = "DEFAULT";
+
 ///
 class Tracer
 {
@@ -34,9 +37,6 @@ public:
 		:	level(l), dst(d)
 		{}
 	};
-
-	constexpr static const char * ENV_VAR_NAME = "CLASS_TRACE_CONFIG";
-	constexpr static const char * DEFAULT_DST = "DEFAULT";
 
 	static Tracer& instance()
 	{

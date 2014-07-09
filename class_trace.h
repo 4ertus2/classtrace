@@ -3,7 +3,7 @@
 
 #ifndef DISABLE_CLASS_TRACE
 
-#ifdef _WIN32_
+#ifdef _MSC_VER
 #define __func__ __FUNCTION__
 #endif
 

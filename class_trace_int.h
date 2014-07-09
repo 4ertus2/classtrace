@@ -6,7 +6,11 @@
 #include <sstream>
 #include <fstream>
 
-#if __cplusplus <= 199711L
+#if _MSC_VER
+#define snprintf _snprintf
+#endif
+
+#if ! defined(_MSC_VER) && __cplusplus <= 199711L
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/thread/mutex.hpp>
@@ -28,7 +32,7 @@
 namespace class_trace
 {
 
-#if __cplusplus <= 199711L
+#if ! defined(_MSC_VER) && __cplusplus <= 199711L
 using boost::shared_ptr;
 using boost::make_shared;
 using boost::mutex;
@@ -74,7 +78,11 @@ public:
 #if 1
 		time_t now = time(NULL);
 		struct tm ts;
+#ifdef _WIN32
+		ts = *localtime(&now);
+#else
 		localtime_r(&now, &ts);
+#endif
 
 		char strDateTime[20];
 		snprintf(strDateTime, 20, "%.2d.%.2d.%4d %.2d:%.2d:%.2d",
