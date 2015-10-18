@@ -19,9 +19,9 @@ else()
 	endif()
 
 	if(${CMAKE_SYSTEM_NAME} STREQUAL FreeBSD)
-		set(CMAKE_C_COMPILER "gcc47")
-		set(CMAKE_CXX_COMPILER "g++47")
-		set(LD_CXX_PATH "/usr/local/lib/gcc47")
+		set(CMAKE_C_COMPILER "gcc48")
+		set(CMAKE_CXX_COMPILER "g++48")
+		set(LD_CXX_PATH "/usr/local/lib/gcc48")
 	endif()
 endif()
 
@@ -54,6 +54,8 @@ target_link_libraries(s2 ${LIB_TRACE})
 
 add_executable(s3 sample3.cpp)
 set_target_properties(s3 PROPERTIES COMPILE_FLAGS -DCLASS_TRACE_OUT=sample3.trace)
+
+add_executable(sx sample_x.cpp)
 
 add_executable(s1_cfg sample1.cpp)
 set_target_properties(s1_cfg PROPERTIES COMPILE_FLAGS -DCLASS_TRACE_CONFIG)
